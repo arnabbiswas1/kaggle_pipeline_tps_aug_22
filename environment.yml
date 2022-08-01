@@ -1,0 +1,30 @@
+name: py_k
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - jupyterlab
+  - ipykernel
+  - pip
+  - pandas
+  - scikit-learn
+  - numpy 
+  - matplotlib 
+  - flake8 
+  - seaborn
+  - pyarrow
+  - lightgbm
+  - xgboost
+  - catboost
+  - rope
+  - black
+  - nodejs
+  - category-encoders=2.2.2
+  - jedi
+  - pip:
+    - kaggle
+    - optuna
+    - ipywidgets>=7.5
+    - plotly==4.14.3
+    - eli5
+    - isort==5.8.0

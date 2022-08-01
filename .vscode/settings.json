@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "terminal.integrated.inheritEnv": false,
+    "python.pythonPath": "/home/anaconda3/envs/py_k/bin/python",
+}

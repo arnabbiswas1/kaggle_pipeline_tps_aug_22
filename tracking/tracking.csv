@@ -1,0 +1,2 @@
+,model_number,model_type,metric,n_estimators,learning_rate,num_leaves,early_stopping_rounds,no_of_features,cv_method,n_fold,oof_score_,cv_avg_score_,cv_std_score_,avg_best_iteration_,std_best_iteration_,lb_score,training_time,comments
+0801_1244,lgb_baseline,lgb,roc_auc,10000.0,0.1,31.0,100.0,24.0,KFold,5.0,0.58166,0.58406,0.00514,14.2,16.5215,0.0,4.0,LGB benchmark Stratified KFold-5
