@@ -1,5 +1,17 @@
 # Kaggle Pipeline for **Kaggle TPS August 2022**
 
+This is a Open Source Python based pipeline for Kaggle tabular data competition. Although it is customized for Kaggle TPS August 2022, with limited code changes, this project can be used as a pipeline for any tabular data competition. This project includes APIs for most of the ML competition related tasks:
+
+		- data processing
+		- visualization
+		- feature engineering
+		- training
+		- ensembling
+		- feature selection
+		- hyperparameter optimization
+		- experiment tracking
+		- submission of prediction to kaggle
+
 ## Steps to execute:
 
 1. Clone the source code from github under <PROJECT_HOME> directory.
