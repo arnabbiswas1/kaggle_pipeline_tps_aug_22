@@ -41,6 +41,11 @@ This is an **Open Source Python based pipeline for Kaggle tabular data competiti
 - tracking              - CSV file to track experiments
 ```
 
+## Acknowledgment
+- I have borrowed the initial project structure and framework code from Kaggle Grandmaster, [Rob Mulla's](https://www.kaggle.com/robikscube) open sourced [code](https://github.com/RobMulla/kaggle-ieee-fraud-detection)
+- Lot of utility functions are from ["Approaching (Almost) Any Machine Learning Problem"](https://github.com/abhishekkrthakur/approachingalmost) by [Abhishek Thakur](https://www.kaggle.com/abhishek)
+- I used some feature selection related code from [SRK's](https://www.kaggle.com/sudalairajkumar) github repository
+
 ## Steps to execute:
 
 1. Clone the source code from github under <PROJECT_HOME> directory.
@@ -98,3 +103,4 @@ Result of the experiment will be tracked at `<PROJECT_HOME>/kaggle_pipeline_tps_
 Following is needed for visualizing plots for optuna using plotly (i.e. plotly dependency):
 
 > jupyter labextension install jupyterlab-plotly@4.14.3
+
