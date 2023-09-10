@@ -9,6 +9,7 @@ import seaborn as sns
 import statsmodels.tsa.api as tsa
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
+import missingno as msno
 
 # matplotlib.style.use("dark_background")
 
@@ -645,3 +646,29 @@ def plot_acf_pacf_for_series(ser, lags=50, title="", figsize=(10, 4)):
     plot_acf(ser, ax=ax1, lags=lags, title=f"ACF for {title}")
     plot_pacf(ser, ax=ax2, lags=lags, title=f"PACF for {title}")
     plt.show()
+
+
+def plot_missing_value_matrix(df):
+    """
+    Generate a missing value matrix plot for the given DataFrame using missingno.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        None
+    """
+    msno.matrix(df)
+
+
+def plot_missing_value_bar(df):
+    """
+    Generate a missing value bar plot for the given DataFrame using missingno.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        None
+    """
+    msno.bar(df)
