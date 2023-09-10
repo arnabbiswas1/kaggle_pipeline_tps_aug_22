@@ -255,3 +255,88 @@ def check_if_floats_are_int(df):
         else:
             print(f"Feature {column} have decimals")
     return int_features
+
+
+def create_summary_df(df, target_column):
+    """
+    Create a summary DataFrame from a given DataFrame with counts and percentages.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame containing the data.
+        target_column (str): The name of the target column for which to generate the summary.
+
+    Returns:
+        pandas.DataFrame: A DataFrame with columns 'target_column_value',
+        'target_column_counts', and 'target_column_percentage' containing value counts
+        and percentages of the target_column.
+    """
+    counts = df[target_column].value_counts()
+    percentages = df[target_column].value_counts(normalize=True).mul(100)
+
+    df = pd.DataFrame(
+        {
+            f"{target_column}_value": counts.index,
+            f"{target_column}_counts": counts.values,
+            f"{target_column}_percentage": percentages.values,
+        }
+    )
+
+    return df
+
+
+def generate_unique_count_summary(df):
+    """
+    Generate a summary DataFrame showing the unique count, dtype, and fraction of unique values
+    for each column in the input DataFrame.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        pandas.DataFrame:
+        A summary DataFrame with columns 'name', 'nunique', 'dtype', and 'fraction'.
+    """
+    unique_count_df = pd.DataFrame(
+        {"name": df.columns, "nunique": df.nunique(), "dtype": df.dtypes}
+    )
+    unique_count_df["fraction"] = (unique_count_df["nunique"] / len(df)).mul(100)
+    unique_count_df = unique_count_df.sort_values(by="fraction")
+    unique_count_df = unique_count_df.reset_index(drop=True)
+
+    return unique_count_df
+
+
+def calculate_skew_summary(dataframe, numeric_features):
+    """
+    Calculate the skewness for each numeric feature in the input DataFrame.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+        numeric_features (list): List of column names corresponding to numeric features.
+
+    Returns:
+        pandas.DataFrame: A summary DataFrame with columns 'feature' and 'skew'.
+    """
+    df_skew = pd.DataFrame(dataframe[numeric_features].skew())
+    df_skew = df_skew.reset_index()
+    df_skew.columns = ["feature", "skew"]
+
+    return df_skew
+
+
+def get_columns_with_null_values(df):
+    """
+    Get a list of column names in the DataFrame that contain null (NaN) values.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        list: A list of column names with null values.
+
+    Example Usage:
+    # Obtain a list of column names with null values
+    null_columns = get_columns_with_null_values(data_df)
+    print(f"Columns with null values: {null_columns}")
+    """
+    return [col for col in df.columns if df[col].isnull().any()]
