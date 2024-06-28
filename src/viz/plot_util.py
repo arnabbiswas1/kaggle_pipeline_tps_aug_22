@@ -9,6 +9,7 @@ import seaborn as sns
 import statsmodels.tsa.api as tsa
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
+import missingno as msno
 
 # matplotlib.style.use("dark_background")
 
@@ -164,10 +165,19 @@ def plot_barh_train_test_side_by_side(
 
 def plot_null_percentage_train_test_side_by_side(df_train, df_test, figsize=(20, 20)):
     """
-    Plot histogram for a particular feature both for train and test.
+    Plot histograms displaying the percentage of null values for each feature in both train
+    and test DataFrames side by side.
 
-    kind : Type of the plot
+    Parameters:
+        df_train (pd.DataFrame): The training DataFrame.
+        df_test (pd.DataFrame): The test DataFrame.
+        figsize (tuple): A tuple specifying the figure size (width, height). Default is (20, 20).
 
+    Returns:
+        None
+
+    Example Usage:
+        plot_null_percentage_train_test_side_by_side(train_df, test_df, figsize=(12, 8))
     """
     fig, ((ax1, ax2)) = plt.subplots(1, 2, figsize=figsize)
 
@@ -183,10 +193,46 @@ def plot_null_percentage_train_test_side_by_side(df_train, df_test, figsize=(20,
     plt.show()
 
 
-def plot_line_train_test_overlapping(df_train, df_test, feature_name, figsize=(10, 5)):
+def plot_line_train_test_overlapping(df_train, df_test, feature_name, figsize=(10, 5), reset_index=True):
     """
-    Plot line for a particular feature both for train and test
+    Plot line charts for a specific feature in both train and test datasets, overlapping them for comparison.
+
+    Parameters:
+        df_train (pd.DataFrame): The training DataFrame containing the feature of interest.
+        df_test (pd.DataFrame): The test DataFrame containing the same feature for comparison.
+        feature_name (str): The name of the feature to be plotted.
+        figsize (tuple): A tuple specifying the figure size (width, height). Default is (10, 5).
+        reset_index (bool): Whether to reset the index of the DataFrames before plotting. Default is True.
+
+
+    Returns:
+        None
+
+    Example Usage:
+        # Visualize the 'Feature1' distribution in both train and test datasets
+        plot_line_train_test_overlapping(train_df, test_df, 'Feature1', figsize=(12, 6), reset_index=True)
+
+    Description:
+        This function generates line charts to visualize the distribution of a specific feature
+        ('feature_name') in both the training and test datasets. The line charts are overlapped
+        for direct comparison.
+
+        - The 'df_train' DataFrame contains the training data with the feature.
+        - The 'df_test' DataFrame contains the test data with the same feature for comparison.
+
+        The function allows you to observe how the distribution of the chosen feature differs
+        between the training and test datasets.
     """
+    # Check if the specified feature is numeric
+    if not pd.api.types.is_numeric_dtype(df_train[feature_name]):
+        raise TypeError(f"'{feature_name}' is not a numeric column.")
+
+    # Reset the index of DataFrames if reset_index is True
+    if reset_index:
+        df_train = df_train.reset_index()
+        df_test = df_test.reset_index()
+
+    # Plot the feature distribution for the training dataset
     df_train[feature_name].plot(
         kind="line",
         figsize=figsize,
@@ -600,3 +646,29 @@ def plot_acf_pacf_for_series(ser, lags=50, title="", figsize=(10, 4)):
     plot_acf(ser, ax=ax1, lags=lags, title=f"ACF for {title}")
     plot_pacf(ser, ax=ax2, lags=lags, title=f"PACF for {title}")
     plt.show()
+
+
+def plot_missing_value_matrix(df):
+    """
+    Generate a missing value matrix plot for the given DataFrame using missingno.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        None
+    """
+    msno.matrix(df)
+
+
+def plot_missing_value_bar(df):
+    """
+    Generate a missing value bar plot for the given DataFrame using missingno.
+
+    Parameters:
+        dataframe (pandas.DataFrame): The input DataFrame.
+
+    Returns:
+        None
+    """
+    msno.bar(df)
