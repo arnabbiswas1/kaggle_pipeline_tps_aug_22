@@ -88,7 +88,7 @@ def main():
     logger.info("Changing data type ..")
     combined_df = process_data.change_dtype(logger, features_df, np.int64, np.int32)
     combined_df = process_data.change_dtype(logger, features_df, np.float64, np.float32)
-    combined_df = process_data.change_dtype(logger, features_df, np.object, "category")
+    combined_df = process_data.change_dtype(logger, features_df, object, "category")
 
     logger.info(f"Writing generated features to {constants.FEATURES_DATA_DIR}/{FEATURE_FILE_NAME}")
     features_df.to_parquet(
